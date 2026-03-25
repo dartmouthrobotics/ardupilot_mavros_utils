@@ -1,0 +1,143 @@
+# Common configuration for APM2 autopilot
+#
+/**:
+  ros__parameters:
+    startup_px4_usb_quirk: false
+
+# --- system plugins ---
+
+# sys_status
+/**/sys:
+  ros__parameters:
+    min_voltage: [10.0]   # diagnostics min voltage, use a vector i.e. [16.2, 16.0] for multiple batteries, up-to 10 are supported
+                          # to achieve the same on a ROS launch file do: <rosparam param="sys/min_voltage">[16.2, 16.0]</rosparam>
+    disable_diag: false   # disable all sys_status diagnostics, except heartbeat
+    heartbeat_rate: 1.0   # send heartbeat rate in Hertz
+    heartbeat_mav_type: "ONBOARD_CONTROLLER"
+    conn_timeout: 10.0    # heartbeat timeout in seconds
+
+# sys_time
+/**/time:
+  ros__parameters:
+    time_ref_source: "fcu"    # time_reference source
+    timesync_mode: MAVLINK
+    timesync_avg_alpha: 0.6   # timesync averaging factor
+    timesync_rate: 10.0       # TIMESYNC rate in Hertz (feature disabled if 0.0)
+    system_time_rate: 1.0     # send system time to FCU rate in Hertz (disabled if 0.0)
+
+# --- mavros plugins (alphabetical order) ---
+
+# 3dr_radio
+/**/tdr_radio:
+  ros__parameters:
+    low_rssi: 40  # raw rssi lower level for diagnostics
+
+# actuator_control
+# None
+
+# command
+/**/cmd:
+  ros__parameters:
+    use_comp_id_system_control: false   # quirk for some old FCUs
+
+# dummy
+# None
+
+# ftp
+# None
+
+# global_position
+/**/global_position:
+  ros__parameters:
+    frame_id: "map"               # origin frame
+    child_frame_id: "base_link"   # body-fixed frame
+    rot_covariance: 99999.0       # covariance for attitude?
+    gps_uere: 1.0                 # User Equivalent Range Error (UERE) of GPS sensor (m)
+    use_relative_alt: true        # use relative altitude for local coordinates
+    tf.send: false                # send TF?
+    tf.frame_id: "map"            # TF frame_id
+    tf.global_frame_id: "earth"   # TF earth frame_id
+    tf.child_frame_id: "base_link"  # TF child_frame_id
+
+# imu_pub
+/**/imu:
+  ros__parameters:
+    frame_id: "base_link"
+    # need find actual values
+    linear_acceleration_stdev: 0.0003
+    angular_velocity_stdev: 0.0003490659  # 0.02 degrees
+    orientation_stdev: 1.0
+    magnetic_stdev: 0.0
+
+# local_position
+/**/local_position:
+  ros__parameters:
+    frame_id: "map"
+    tf.send: false
+    tf.frame_id: "map"
+    tf.child_frame_id: "base_link"
+    tf.send_fcu: false
+
+# param
+# None, used for FCU params
+
+# rc_io
+# None
+
+# setpoint_accel
+/**/setpoint_accel:
+  ros__parameters:
+    send_force: false
+
+# setpoint_attitude
+/**/setpoint_attitude:
+  ros__parameters:
+    reverse_thrust: false       # allow reversed thrust
+    use_quaternion: false       # enable PoseStamped topic subscriber
+    tf.listen: false            # enable tf listener (disable topic subscribers)
+    tf.frame_id: "map"
+    tf.child_frame_id: "target_attitude"
+    tf.rate_limit: 50.0
+
+# setpoint_raw
+/**/setpoint_raw:
+  ros__parameters:
+    thrust_scaling: 1.0         # specify thrust scaling (normalized, 0 to 1) for thrust (like PX4)
+
+# setpoint_position
+/**/setpoint_position:
+  ros__parameters:
+    tf.listen: false            # enable tf listener (disable topic subscribers)
+    tf.frame_id: "map"
+    tf.child_frame_id: "target_position"
+    tf.rate_limit: 50.0
+    mav_frame: LOCAL_NED
+
+# guided_target
+/**/guided_target:
+  ros__parameters:
+    tf.listen: false           # enable tf listener (disable topic subscribers)
+    tf.frame_id: "map"
+    tf.child_frame_id: "target_position"
+    tf.rate_limit: 50.0
+
+# setpoint_velocity
+/**/setpoint_velocity:
+  ros__parameters:
+    mav_frame: LOCAL_NED
+
+# vfr_hud
+# None
+
+# waypoint
+/**/mission:
+  ros__parameters:
+    pull_after_gcs: true        # update mission if gcs updates
+    use_mission_item_int: true  # use the MISSION_ITEM_INT message instead of MISSION_ITEM
+                                # for uploading waypoints to FCU
+
+# odom
+/**/odometry:
+  ros__parameters:
+    fcu.odom_parent_id_des: "map"   # desired parent frame rotation of the FCU's odometry
+    fcu.odom_child_id_des: "map"    # desired child frame rotation of the FCU's odometry

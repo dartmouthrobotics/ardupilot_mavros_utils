@@ -1,0 +1,47 @@
+/**:
+  ros__parameters:
+    plugin_denylist:
+      # common
+      - actuator_control
+      - ftp
+      - hil
+      # extras
+      - altitude
+      - debug_value
+      - image_pub
+      - px4flow
+      - vibration
+      - vision_speed_estimate
+      - wheel_odometry
+      - adsb
+      - cam_imu_sync
+      - camera
+      - cellular_status
+      - debug_value
+      - distance_sensor
+      - esc_status
+      - esc_telemetry
+      - fake_gps
+      - gimbal_control
+      - landing_target
+      - log_transfer
+      - mocap_pose_estimate
+      - obstacle_distance
+      - obstacle_distance_3d
+      - onboard_computer_status
+      - optical_flow
+      - play_tune
+      - px4flow
+      - rallypoint
+      - rangefinder
+      - sim_state
+      - tdr_radio
+      - terrain
+      - vision_pose
+      - vision_speed
+      - wind_estimation
+      - companion_process
+
+
+    # plugin_allowlist:
+    #   - 'sys_*'
