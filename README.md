@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![ROS 2](https://img.shields.io/badge/ROS_2-Jazzy-34a853.svg)](#)
+[![ROS 2 CI](https://github.com/dartmouthrobotics/ardupilot_mavros_utils/actions/workflows/ros2_ci.yml/badge.svg)](https://github.com/dartmouthrobotics/ardupilot_mavros_utils/actions/workflows/ros2_ci.yml)
 
 ROS 2 utility package for bridging ArduPilot flight controllers via MAVROS, maintained by the Dartmouth Reality and Robotics Lab.
 
