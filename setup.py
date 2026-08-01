@@ -10,12 +10,16 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        # Install launch files
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
+        # Install configuration files
+        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='Alberto Quattrini Li',
-    maintainer_email='Alberto Quattrini Li@todo.todo',
-    description='TODO: Package description',
+    maintainer_email='Alberto.Quattrini.Li@dartmouth.edu',
+    description='Launch files and configurations for MAVROS.',
     license='MIT',
     extras_require={
         'test': [
