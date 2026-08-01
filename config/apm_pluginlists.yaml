@@ -1,3 +1,4 @@
+# Based originally on MAVROS default apm_pluginlists.yaml template
 /**:
   ros__parameters:
     plugin_denylist:
