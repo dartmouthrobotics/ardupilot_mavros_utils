@@ -1,8 +1,7 @@
-import os
-
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
+from launch.substitutions import PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
@@ -10,8 +9,8 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     pkg_share = FindPackageShare('ardupilot_mavros_utils')
 
-    default_pluginlists_path = os.path.join(pkg_share, 'config', 'apm_pluginlists.yaml')
-    default_config_path = os.path.join(pkg_share, 'config', 'apm_config.yaml')
+    default_pluginlists_path = PathJoinSubstitution([pkg_share, 'config', 'apm_pluginlists.yaml'])
+    default_config_path = PathJoinSubstitution([pkg_share, 'config', 'apm_config.yaml'])
 
     # Declare all configurable launch arguments
     fcu_url_arg = DeclareLaunchArgument(
