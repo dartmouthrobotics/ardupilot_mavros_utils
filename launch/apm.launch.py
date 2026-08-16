@@ -74,6 +74,12 @@ def generate_launch_description():
         description='Path to MAVROS general config YAML'
     )
 
+    use_sim_time_arg = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='false',
+        description='Use simulation (e.g., Gazebo) clock if true'
+    )
+
     # Define the MAVROS node with target IDs and local system/component IDs
     mavros_node = Node(
         package='mavros',
@@ -90,6 +96,7 @@ def generate_launch_description():
                 'system_id': LaunchConfiguration('system_id'),
                 'component_id': LaunchConfiguration('component_id'),
                 'fcu_protocol': LaunchConfiguration('fcu_protocol'),
+                'use_sim_time': LaunchConfiguration('use_sim_time'),
             },
             LaunchConfiguration('pluginlists_yaml'),
             LaunchConfiguration('config_yaml'),
@@ -109,5 +116,6 @@ def generate_launch_description():
         namespace_arg,
         pluginlists_yaml_arg,
         config_yaml_arg,
+        use_sim_time_arg,
         mavros_node
     ])
